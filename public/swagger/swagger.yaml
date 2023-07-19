@@ -1,0 +1,220 @@
+swagger: '2.0'
+info:
+  description: StarWars APis
+  version: 1.0.0
+  title: StarWars  API's
+basePath: /star-wars-api/api/
+tags:
+  - name: Star-Wars
+    description: Manage Star Wars Apis
+
+paths:
+  /login:
+    post:
+      tags:
+        - Login
+      summary: User Login
+      description: 'User Login with this API'
+      operationId: login
+      consumes:
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      parameters:   
+        - in: formData
+          name: email
+          type: string
+          required: true  
+        - in: formData
+          name: password
+          type: string
+          required: true
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad request 
+  /register:
+    post:
+      tags:
+        - Register
+      summary: User Registretion
+      description: 'User Registretion with this API'
+      operationId: login
+      consumes:
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      parameters:   
+        - in: formData
+          name: name
+          type: string
+          required: true  
+        - in: formData
+          name: email
+          type: string
+          required: true
+        - in: formData
+          name: password
+          type: string
+          required: true
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad request                  
+  /user:
+      get:
+        tags:
+          - User
+        summary: Show User
+        description: 'Show User Details with this API'
+        operationId: user
+        consumes:
+          - application/json
+        produces:
+          - application/json
+        responses:
+          '200':
+            description: successful operation
+          '400':
+            description: Bad request
+        security:
+          - Bearer: []    
+  /insert_films:
+    post:
+      tags:
+        - Insert 
+      summary: Insert Film Data
+      description: 'Insert Film Data with this API'
+      operationId: login
+      consumes:
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      parameters:   
+        - in: formData
+          name: id
+          type: int
+          required: true  
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad request                  
+      security:
+          - Bearer: []
+  /all_movies:
+      get:
+        tags:
+          - Fetch
+        summary: Fetch All Movies
+        description: 'Fetch All Movies Details with this API'
+        operationId: user
+        consumes:
+          - application/json
+        produces:
+          - application/json
+        responses:
+          '200':
+            description: successful operation
+          '400':
+            description: Bad request
+        security:
+          - Bearer: []
+  /search/{title}:
+    get:
+      tags:
+        - Search 
+      summary: Search By Title
+      description: 'Search Film By Title with this API'
+      operationId: search
+      consumes:
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      parameters:   
+        - in: path
+          name: title
+          type: string
+          required: true  
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad request                  
+      security:
+          - Bearer: []
+  /update_movie/{id}:
+    post:
+      tags:
+        - Update 
+      summary: Update Movie  Data By Id
+      description: 'Update Movie  Data By Id with this API'
+      operationId: update
+      consumes:
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      parameters:   
+        - in: formData
+          name: title
+          type: string
+          required: true
+        - in: formData
+          name: episode_id
+          type: int
+          required: true
+        - in: formData
+          name: opening_crawl
+          type: string
+          required: true
+        - in: formData
+          name: director
+          type: string
+          required: true
+        - in: formData
+          name: producer
+          type: string
+          required: true
+        - in: formData
+          name: release_date
+          type: date
+          required: true
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad request                  
+      security:
+          - Bearer: []
+  /delete_movie/{film_id}:
+    get:
+      tags:
+        - Delete 
+      summary: Delete By Film Id
+      description: 'Delete Film By Film Id with this API'
+      operationId: delete
+      consumes:
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      parameters:   
+        - in: path
+          name: film_id
+          type: int
+          required: true  
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad request                  
+      security:
+          - Bearer: []        
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: >-
+      Enter the token with the `Bearer: ` prefix, e.g. "Bearer abcde12345".

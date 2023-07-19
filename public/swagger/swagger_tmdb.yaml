@@ -1,0 +1,177 @@
+swagger: '2.0'
+info:
+  description: TMDB APis
+  version: 1.0.0
+  title: TMDB API's
+basePath: /star-wars-api/api/
+tags:
+  - name: TMDB-APIS
+    description: Manage TMDB Apis
+
+paths:
+  /login:
+    post:
+      tags:
+        - Login
+      summary: User Login
+      description: 'User Login with this API'
+      operationId: login
+      consumes:
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      parameters:   
+        - in: formData
+          name: email
+          type: string
+          required: true  
+        - in: formData
+          name: password
+          type: string
+          required: true
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad request 
+  /register:
+    post:
+      tags:
+        - Register
+      summary: User Registretion
+      description: 'User Registretion with this API'
+      operationId: login
+      consumes:
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      parameters:   
+        - in: formData
+          name: name
+          type: string
+          required: true  
+        - in: formData
+          name: email
+          type: string
+          required: true
+        - in: formData
+          name: password
+          type: string
+          required: true
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad request                  
+  /user:
+      get:
+        tags:
+          - User
+        summary: Show User
+        description: 'Show User Details with this API'
+        operationId: user
+        consumes:
+          - application/json
+        produces:
+          - application/json
+        responses:
+          '200':
+            description: successful operation
+          '400':
+            description: Bad request
+        security:
+          - Bearer: []
+  /tmdb/movies/saveApiData:
+    post:
+      tags:
+        - Insert 
+      summary: Fetch Data From Third Party Api And insert into our database 
+      description: 'Insert Film Data with this API'
+      operationId: insert
+      consumes:
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      parameters:   
+        - in: formData
+          name: page
+          type: int
+          required: true  
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad request                  
+      security:
+          - Bearer: []
+  /tmdb/movies/viewMovies:
+      get:
+        tags:
+          - Fetch
+        summary: Fetch All Movies
+        description: 'Fetch All Movies Details with this API'
+        operationId: user
+        consumes:
+          - application/json
+        produces:
+          - application/json
+        responses:
+          '200':
+            description: successful operation
+          '400':
+            description: Bad request
+        security:
+          - Bearer: []
+  /tmdb/movies/viewMovies/{title}:
+    get:
+      tags:
+        - Search 
+      summary: Search By Title
+      description: 'Search Film By Title with this API'
+      operationId: search
+      consumes:
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      parameters:   
+        - in: path
+          name: title
+          type: string
+          required: true  
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad request                  
+      security:
+          - Bearer: []
+  /tmdb/movies/deleteRecord/{tmdb_movie_id}:
+    get:
+      tags:
+        - Delete 
+      summary: Delete By Film Id
+      description: 'Delete Film By Film Id with this API'
+      operationId: delete
+      consumes:
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      parameters:   
+        - in: path
+          name: film_id
+          type: int
+          required: true  
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad request                  
+      security:
+          - Bearer: []        
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: >-
+      Enter the token with the `Bearer: ` prefix, e.g. "Bearer abcde12345".
